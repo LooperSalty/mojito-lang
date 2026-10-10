@@ -1,0 +1,298 @@
+<title>Mojito Playground</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Shrikhand&display=swap">
+<style>
+  /* Mise en page : barre du bar en haut, éditeur + palette à gauche, console à droite ; une colonne sur mobile */
+  :root {
+    --ice: #edf4f0;
+    --glass: #ffffff;
+    --rum: #13342a;
+    --mint: #23704f;
+    --muted: #587569;
+    --line: #cfe0d6;
+    --console: #f6faf7;
+    --key: #f1f7f3;
+    --key-hover: #e2efe7;
+    --cherry: #b4283f;
+    --cherry-soft: #fbe9ec;
+    --lime: #c4dd52;
+    --lime-ink: #14301f;
+    --shadow: 0 1px 2px rgb(19 52 42 / 0.06), 0 8px 24px rgb(19 52 42 / 0.06);
+    --font-display: 'Shrikhand', 'Cooper Black', Georgia, serif;
+    --font-body: 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+    --font-emoji: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif;
+    --radius: 14px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ice: #0d1d17;
+      --glass: #13281f;
+      --rum: #e2f1e8;
+      --mint: #84d3ac;
+      --muted: #93b4a6;
+      --line: #23443a;
+      --console: #0b1913;
+      --key: #183229;
+      --key-hover: #21453a;
+      --cherry: #ff8496;
+      --cherry-soft: #3a1820;
+      --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.25);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ice: #0d1d17;
+    --glass: #13281f;
+    --rum: #e2f1e8;
+    --mint: #84d3ac;
+    --muted: #93b4a6;
+    --line: #23443a;
+    --console: #0b1913;
+    --key: #183229;
+    --key-hover: #21453a;
+    --cherry: #ff8496;
+    --cherry-soft: #3a1820;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.25);
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ice);
+    color: var(--rum);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .app {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding-inline: 16px;
+    padding-block: 18px 32px;
+    display: grid;
+    gap: 16px;
+  }
+
+  /* Barre */
+  .bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; }
+  .brand { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .wordmark { font-family: var(--font-display); font-size: 2.1rem; line-height: 1; color: var(--mint); letter-spacing: 0.01em; }
+  .wordmark .glass { font-family: var(--font-emoji); font-size: 1.7rem; margin-right: 4px; }
+  .tagline { color: var(--muted); font-size: 0.95rem; text-wrap: balance; }
+  .controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+  .field { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--muted); }
+  select, .btn {
+    font: inherit;
+    font-size: 0.95rem;
+    color: var(--rum);
+    background: var(--glass);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 8px 12px;
+    min-height: 40px;
+  }
+  select { max-width: 100%; }
+  .btn { cursor: pointer; font-weight: 600; }
+  .btn:hover { background: var(--key-hover); }
+  .btn-run { background: var(--lime); color: var(--lime-ink); border-color: transparent; display: inline-flex; gap: 10px; align-items: center; }
+  .btn-run:hover { background: var(--lime); filter: brightness(1.05); }
+  .btn-run kbd { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 400; opacity: 0.75; }
+  .check { display: flex; align-items: center; gap: 6px; font-size: 0.9rem; color: var(--muted); cursor: pointer; }
+  .check input { accent-color: var(--mint); width: 16px; height: 16px; }
+  :focus-visible { outline: 2px solid var(--mint); outline-offset: 2px; }
+
+  /* Espace de travail */
+  .workspace { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+  .pane {
+    background: var(--glass);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    min-width: 0;
+    display: grid;
+  }
+  .pane-head {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 10px 14px; border-bottom: 1px solid var(--line);
+    font-family: var(--font-mono); font-size: 0.82rem; color: var(--muted);
+  }
+  .status { font-family: var(--font-body); font-weight: 600; font-size: 0.8rem; padding: 2px 10px; border-radius: 999px; background: var(--key); color: var(--mint); }
+  .status[data-state="error"] { background: var(--cherry-soft); color: var(--cherry); }
+
+  .editor { display: grid; grid-template-columns: auto minmax(0, 1fr); height: clamp(300px, 50vh, 600px); }
+  .gutter, .code {
+    font-family: var(--font-mono), var(--font-emoji);
+    font-size: 19px;
+    line-height: 32px;
+    padding-block: 12px;
+    margin: 0;
+  }
+  .gutter {
+    overflow: hidden;
+    padding-inline: 12px 10px;
+    text-align: right;
+    color: var(--muted);
+    opacity: 0.7;
+    font-size: 13px;
+    border-right: 1px solid var(--line);
+    user-select: none;
+    min-width: 44px;
+  }
+  .gutter span { display: block; }
+  .gutter .has-error { color: var(--cherry); opacity: 1; font-weight: 600; }
+  .code {
+    width: 100%; height: 100%; resize: none; border: 0;
+    padding-inline: 14px;
+    background: transparent; color: var(--rum);
+    white-space: pre; overflow: auto; tab-size: 2;
+  }
+  .code:focus-visible { outline: none; box-shadow: inset 0 0 0 2px var(--mint); border-radius: 0 0 var(--radius) 0; }
+
+  /* Palette */
+  .palette { display: flex; flex-wrap: wrap; gap: 14px 22px; padding: 14px; border-top: 1px solid var(--line); }
+  .palette-group { display: grid; gap: 6px; min-width: 0; }
+  .palette-title { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+  .palette-keys { display: flex; flex-wrap: wrap; gap: 4px; }
+  .key {
+    font-family: var(--font-emoji);
+    font-size: 21px;
+    min-width: 40px; height: 40px;
+    padding-inline: 6px;
+    white-space: nowrap;
+    display: grid; place-items: center;
+    border: 1px solid transparent; border-radius: 10px;
+    background: var(--key); color: var(--rum);
+    cursor: pointer; padding-block: 0;
+    transition: transform 120ms ease, background 120ms ease;
+  }
+  .key:hover { background: var(--key-hover); transform: translateY(-1px); }
+  .key:active { transform: translateY(1px) scale(0.96); }
+  .hint { margin: 0; padding: 10px 14px 14px; color: var(--muted); font-size: 0.9rem; border-top: 1px dashed var(--line); min-height: 1.5em; }
+
+  /* Console */
+  .tabs { display: flex; gap: 4px; padding: 8px 8px 0; border-bottom: 1px solid var(--line); overflow-x: auto; }
+  .tab {
+    font: inherit; font-size: 0.88rem; font-weight: 600; color: var(--muted);
+    background: none; border: 0; border-bottom: 2px solid transparent;
+    padding: 8px 12px; cursor: pointer; white-space: nowrap;
+  }
+  .tab[aria-selected="true"] { color: var(--rum); border-bottom-color: var(--mint); }
+  .console {
+    margin: 0; padding: 14px 16px;
+    background: var(--console);
+    font-family: var(--font-mono), var(--font-emoji);
+    font-size: 15px; line-height: 1.65;
+    white-space: pre; overflow: auto;
+    height: clamp(260px, 42vh, 520px);
+  }
+  .console.code-view { font-size: 12.5px; line-height: 1.6; }
+  .out-error { color: var(--cherry); display: block; margin-top: 6px; }
+  .stdin-box { display: grid; gap: 6px; padding: 12px 14px; border-top: 1px solid var(--line); }
+  .stdin-box label { font-size: 0.85rem; font-weight: 600; }
+  .stdin-box small { font-weight: 400; color: var(--muted); }
+  .stdin-box textarea {
+    font-family: var(--font-mono), var(--font-emoji); font-size: 14px;
+    border: 1px solid var(--line); border-radius: 10px; background: var(--console); color: var(--rum);
+    padding: 8px 10px; min-height: 64px; resize: vertical; width: 100%;
+  }
+  .engine { margin: 0; padding: 0 14px 12px; font-size: 0.78rem; color: var(--muted); }
+
+  /* Aide-mémoire */
+  .cheats { display: grid; gap: 10px; }
+  .cheats h2 { margin: 0; font-size: 1rem; font-weight: 700; }
+  .cheat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 10px; }
+  .cheat { background: var(--glass); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; min-width: 0; }
+  .cheat p { margin: 0 0 6px; font-size: 0.85rem; color: var(--muted); }
+  .cheat pre { margin: 0; font-family: var(--font-mono), var(--font-emoji); font-size: 15px; line-height: 1.7; overflow-x: auto; }
+  footer { color: var(--muted); font-size: 0.85rem; }
+  footer code { font-family: var(--font-mono); font-size: 0.82rem; background: var(--key); padding: 2px 6px; border-radius: 6px; }
+
+  @media (max-width: 880px) {
+    .workspace { grid-template-columns: minmax(0, 1fr); }
+    .editor { height: clamp(260px, 46vh, 460px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .key { transition: none; }
+  }
+</style>
+
+<div class="app">
+  <header class="bar">
+    <div class="brand">
+      <span class="wordmark"><span class="glass" aria-hidden="true">🍹</span>Mojito</span>
+      <span class="tagline">Le langage de programmation qui s'écrit uniquement en emojis.</span>
+    </div>
+    <div class="controls">
+      <label class="field" for="example">Exemple
+        <select id="example"></select>
+      </label>
+      <label class="check" for="ascii"><input type="checkbox" id="ascii"> Nombres en chiffres</label>
+      <button type="button" class="btn" id="copy">Copier</button>
+      <button type="button" class="btn btn-run" id="run">Exécuter <kbd>Ctrl ↵</kbd></button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <section class="pane" aria-label="Éditeur">
+      <div class="pane-head"><span>programme.emoji</span><span class="status" id="status">…</span></div>
+      <div class="editor">
+        <pre class="gutter" id="gutter" aria-hidden="true"></pre>
+        <textarea class="code" id="code" spellcheck="false" autocomplete="off" autocapitalize="off" wrap="off" aria-label="Code Mojito"></textarea>
+      </div>
+      <div class="palette" id="palette"></div>
+      <p class="hint" id="hint">Touchez un emoji pour l'insérer à la position du curseur. Sous Windows, <kbd>Win</kbd> + <kbd>.</kbd> ouvre aussi le sélecteur d'emojis.</p>
+    </section>
+
+    <section class="pane" aria-label="Résultat">
+      <div class="tabs" role="tablist">
+        <button type="button" class="tab" role="tab" data-tab="output" aria-selected="true">Sortie</button>
+        <button type="button" class="tab" role="tab" data-tab="js" aria-selected="false">JavaScript généré</button>
+        <button type="button" class="tab" role="tab" data-tab="tokens" aria-selected="false">Jetons</button>
+      </div>
+      <pre class="console" id="output" role="tabpanel" aria-live="polite"></pre>
+      <pre class="console code-view" id="js" role="tabpanel" hidden></pre>
+      <pre class="console code-view" id="tokens" role="tabpanel" hidden></pre>
+      <div class="stdin-box">
+        <label for="stdin">Entrées pour 🎤 <small>une ligne par lecture</small></label>
+        <textarea id="stdin" spellcheck="false"></textarea>
+      </div>
+      <p class="engine" id="engine"></p>
+    </section>
+  </main>
+
+  <section class="cheats" aria-label="Aide-mémoire">
+    <h2>Aide-mémoire</h2>
+    <div class="cheat-grid">
+      <div class="cheat"><p>Variable, constante, affichage</p><pre>📦 🍎 ⬅️ 4️⃣2️⃣
+🔒 🍋 ⬅️ 💬citron💬
+📢 🍎 🔸 🍋</pre></div>
+      <div class="cheat"><p>Si / sinon si / sinon</p><pre>🤔 🍎 🔼 🔟
+  📢 💬grand💬
+🤨 🍎 🟰 🔟
+  📢 💬pile💬
+🙃
+  📢 💬petit💬
+🔚</pre></div>
+      <div class="cheat"><p>Boucles, intervalle et liste</p><pre>🔂 🐝 📥 1️⃣ ➡️ 3️⃣
+  📢 🐝
+🔚
+📦 📋 ⬅️ 🌜 1️⃣ 🔸 2️⃣ 🌛
+🔁 📏 📋 🔽 5️⃣
+  📋 ⬅️ 📋 ➕ 🌜 0️⃣ 🌛
+🔚</pre></div>
+      <div class="cheat"><p>Fonction, appel, retour</p><pre>🧩 🍰 👉 🅰️ 🔸 🅱️ 👈
+  ↩️ 🅰️ ➕ 🅱️
+🔚
+📢 🍰👉 1️⃣ 🔸 2️⃣ 👈</pre></div>
+    </div>
+  </section>
+
+  <footer>
+    En local : <code>node bin/mojito.ts run programme.emoji</code> · <code>node bin/mojito.ts build programme.emoji</code> produit un fichier JavaScript autonome.
+  </footer>
+</div>
+
+<script>/*__MOJITO_BUNDLE__*/</script>

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Mojito",
+  "scopeName": "source.mojito",
+  "patterns": [
+    { "include": "#comment" },
+    { "include": "#string" },
+    { "include": "#invalid" }
+  ],
+  "repository": {
+    "comment": {
+      "name": "comment.line.mojito",
+      "match": "💭.*$"
+    },
+    "string": {
+      "name": "string.quoted.mojito",
+      "begin": "💬",
+      "end": "💬"
+    },
+    "invalid": {
+      "name": "invalid.illegal.not-emoji.mojito",
+      "match": "[A-Za-z0-9_\"'(){}\\[\\];:,.=+*/<>!?&|-]+"
+    }
+  }
+}

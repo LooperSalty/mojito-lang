@@ -1,0 +1,176 @@
+{
+  "name": "mojito-lang",
+  "displayName": "Mojito 🍹 — langage 100 % emoji",
+  "description": "Écris des programmes en emojis dans des fichiers .emoji : erreurs en direct, explications au survol, snippets, exécution et compilation en un clic.",
+  "version": "1.2.0",
+  "publisher": "mojito-lang",
+  "license": "MIT",
+  "author": "LooperSalty",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LooperSalty/mojito-lang.git",
+    "directory": "editors/vscode"
+  },
+  "homepage": "https://github.com/LooperSalty/mojito-lang#readme",
+  "bugs": {
+    "url": "https://github.com/LooperSalty/mojito-lang/issues"
+  },
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "mojito",
+        "aliases": [
+          "Mojito",
+          "mojito"
+        ],
+        "extensions": [
+          ".emoji",
+          ".moj"
+        ],
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./images/mojito.svg",
+          "dark": "./images/mojito.svg"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "language": "mojito",
+        "scopeName": "source.mojito",
+        "path": "./syntaxes/mojito.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "mojito",
+        "path": "./snippets/mojito.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "mojito.run",
+        "title": "Exécuter le fichier",
+        "category": "Mojito",
+        "icon": "$(play)"
+      },
+      {
+        "command": "mojito.build",
+        "title": "Compiler en JavaScript autonome",
+        "category": "Mojito",
+        "icon": "$(package)"
+      },
+      {
+        "command": "mojito.showJs",
+        "title": "Voir le JavaScript généré",
+        "category": "Mojito",
+        "icon": "$(code)"
+      },
+      {
+        "command": "mojito.newFile",
+        "title": "Nouveau programme",
+        "shortTitle": "Programme Mojito (.emoji)",
+        "category": "Mojito"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "mojito.run",
+          "when": "resourceLangId == mojito",
+          "group": "navigation@1"
+        },
+        {
+          "command": "mojito.showJs",
+          "when": "resourceLangId == mojito",
+          "group": "navigation@2"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "mojito.run",
+          "when": "resourceLangId == mojito",
+          "group": "mojito@1"
+        },
+        {
+          "command": "mojito.build",
+          "when": "resourceLangId == mojito && resourceScheme == file",
+          "group": "mojito@2"
+        },
+        {
+          "command": "mojito.showJs",
+          "when": "resourceLangId == mojito",
+          "group": "mojito@3"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "mojito.run",
+          "when": "resourceLangId == mojito && resourceScheme == file",
+          "group": "mojito@1"
+        },
+        {
+          "command": "mojito.build",
+          "when": "resourceLangId == mojito && resourceScheme == file",
+          "group": "mojito@2"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "mojito.run",
+          "when": "editorLangId == mojito"
+        },
+        {
+          "command": "mojito.build",
+          "when": "editorLangId == mojito"
+        },
+        {
+          "command": "mojito.showJs",
+          "when": "editorLangId == mojito"
+        }
+      ],
+      "file/newFile": [
+        {
+          "command": "mojito.newFile",
+          "group": "file"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "mojito.run",
+        "key": "ctrl+f5",
+        "mac": "cmd+f5",
+        "when": "editorLangId == mojito"
+      }
+    ],
+    "configuration": {
+      "title": "Mojito",
+      "properties": {
+        "mojito.asciiNumbers": {
+          "type": "boolean",
+          "default": false,
+          "description": "Afficher les nombres en chiffres classiques (42) au lieu d'emojis (4️⃣2️⃣)."
+        }
+      }
+    },
+    "configurationDefaults": {
+      "[mojito]": {
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "editor.fontSize": 18,
+        "editor.suggest.snippetsPreventQuickSuggestions": false,
+        "editor.tabCompletion": "on",
+        "files.encoding": "utf8"
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "mojito-lang",
+  "version": "1.0.0",
+  "description": "🍹 Mojito — un langage de programmation 100 % emoji et son compilateur vers JavaScript",
+  "type": "module",
+  "license": "MIT",
+  "author": "LooperSalty",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LooperSalty/mojito-lang.git"
+  },
+  "homepage": "https://github.com/LooperSalty/mojito-lang#readme",
+  "bugs": {
+    "url": "https://github.com/LooperSalty/mojito-lang/issues"
+  },
+  "keywords": [
+    "emoji",
+    "langage-de-programmation",
+    "compilateur",
+    "compiler",
+    "esolang",
+    "typescript",
+    "vscode"
+  ],
+  "bin": {
+    "mojito": "bin/mojito.ts"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "mojito": "node bin/mojito.ts",
+    "test": "node --test \"tests/**/*.test.ts\"",
+    "test:coverage": "node --test --experimental-test-coverage --test-coverage-include=\"src/**\" --test-coverage-include=\"bin/**\" --test-coverage-include=\"editors/**\" \"tests/**/*.test.ts\"",
+    "typecheck": "tsc --noEmit",
+    "build:playground": "node scripts/build-playground.ts",
+    "vscode:build": "node scripts/build-vscode.ts",
+    "vscode:install": "npm run vscode:build && node scripts/install-vscode.ts",
+    "verify": "npm run typecheck && npm test && npm run build:playground && npm run vscode:build"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/vscode": "^1.80.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.9.0"
+  }
+}

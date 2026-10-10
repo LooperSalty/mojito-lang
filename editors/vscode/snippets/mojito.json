@@ -1,0 +1,359 @@
+{
+  "bloc si": {
+    "prefix": "si",
+    "body": [
+      "🤔 ${1:✅}",
+      "  $0",
+      "🔚"
+    ],
+    "description": "🤔 si … 🔚"
+  },
+  "bloc si sinon": {
+    "prefix": "sisinon",
+    "body": [
+      "🤔 ${1:✅}",
+      "  $2",
+      "🙃",
+      "  $0",
+      "🔚"
+    ],
+    "description": "🤔 si … 🙃 sinon … 🔚"
+  },
+  "bloc tant que": {
+    "prefix": "tantque",
+    "body": [
+      "🔁 ${1:✅}",
+      "  $0",
+      "🔚"
+    ],
+    "description": "🔁 tant que … 🔚"
+  },
+  "bloc pour": {
+    "prefix": "pour",
+    "body": [
+      "🔂 ${1:🐝} 📥 ${2:1️⃣ ➡️ 🔟}",
+      "  $0",
+      "🔚"
+    ],
+    "description": "🔂 pour chaque … 📥 … 🔚"
+  },
+  "bloc fonction": {
+    "prefix": "fonction",
+    "body": [
+      "🧩 ${1:🍰} 👉 ${2:🍎} 👈",
+      "  $0",
+      "🔚"
+    ],
+    "description": "🧩 fonction 👉 paramètres 👈 … 🔚"
+  },
+  "variable": {
+    "prefix": "var",
+    "body": "📦 ${1:🍎} ⬅️ $0",
+    "description": "📦 déclarer une variable"
+  },
+  "constante": {
+    "prefix": "const",
+    "body": "🔒 ${1:🍋} ⬅️ $0",
+    "description": "🔒 déclarer une constante"
+  },
+  "texte": {
+    "prefix": "texte",
+    "body": "💬$1💬$0",
+    "description": "💬 texte 💬"
+  },
+  "liste": {
+    "prefix": "liste",
+    "body": "🌜 $1 🌛$0",
+    "description": "🌜 liste 🌛"
+  },
+  "parenthèses": {
+    "prefix": "paren",
+    "body": "👉 $1 👈$0",
+    "description": "👉 … 👈"
+  },
+  "commentaire": {
+    "prefix": "comm",
+    "body": "💭 $0",
+    "description": "💭 commentaire"
+  },
+  "virgule décimale": {
+    "prefix": "point",
+    "body": "⏺️",
+    "description": "⏺️ virgule des nombres décimaux"
+  },
+  "📦 déclarer une variable": {
+    "prefix": "var!",
+    "body": "📦 ",
+    "description": "📦 déclarer une variable"
+  },
+  "🔒 déclarer une constante": {
+    "prefix": "const!",
+    "body": "🔒 ",
+    "description": "🔒 déclarer une constante"
+  },
+  "⬅️ affecter une valeur": {
+    "prefix": "prend",
+    "body": "⬅️ ",
+    "description": "⬅️ affecter une valeur"
+  },
+  "📢 afficher": {
+    "prefix": "affiche",
+    "body": "📢 ",
+    "description": "📢 afficher"
+  },
+  "🎤 lire une ligne": {
+    "prefix": "lire",
+    "body": "🎤 ",
+    "description": "🎤 lire une ligne"
+  },
+  "🤔 si": {
+    "prefix": "si!",
+    "body": "🤔 ",
+    "description": "🤔 si"
+  },
+  "🤨 sinon si": {
+    "prefix": "sinonsi",
+    "body": "🤨 ",
+    "description": "🤨 sinon si"
+  },
+  "🙃 sinon": {
+    "prefix": "sinon",
+    "body": "🙃 ",
+    "description": "🙃 sinon"
+  },
+  "🔚 fin de bloc": {
+    "prefix": "fin",
+    "body": "🔚 ",
+    "description": "🔚 fin de bloc"
+  },
+  "🔁 tant que": {
+    "prefix": "tantque!",
+    "body": "🔁 ",
+    "description": "🔁 tant que"
+  },
+  "🔂 pour chaque": {
+    "prefix": "pour!",
+    "body": "🔂 ",
+    "description": "🔂 pour chaque"
+  },
+  "📥 dans": {
+    "prefix": "dans",
+    "body": "📥 ",
+    "description": "📥 dans"
+  },
+  "💥 sortir de la boucle": {
+    "prefix": "stop",
+    "body": "💥 ",
+    "description": "💥 sortir de la boucle"
+  },
+  "⏭️ passer au tour suivant": {
+    "prefix": "suivant",
+    "body": "⏭️ ",
+    "description": "⏭️ passer au tour suivant"
+  },
+  "🧩 fonction": {
+    "prefix": "fonction!",
+    "body": "🧩 ",
+    "description": "🧩 fonction"
+  },
+  "↩️ renvoyer": {
+    "prefix": "retour",
+    "body": "↩️ ",
+    "description": "↩️ renvoyer"
+  },
+  "👉 ouvrir une parenthèse": {
+    "prefix": "ouvre",
+    "body": "👉 ",
+    "description": "👉 ouvrir une parenthèse"
+  },
+  "👈 fermer une parenthèse": {
+    "prefix": "ferme",
+    "body": "👈 ",
+    "description": "👈 fermer une parenthèse"
+  },
+  "🌜 ouvrir une liste / un indice": {
+    "prefix": "crochet",
+    "body": "🌜 ",
+    "description": "🌜 ouvrir une liste / un indice"
+  },
+  "🌛 fermer une liste / un indice": {
+    "prefix": "fincrochet",
+    "body": "🌛 ",
+    "description": "🌛 fermer une liste / un indice"
+  },
+  "🔸 séparateur": {
+    "prefix": "virgule",
+    "body": "🔸 ",
+    "description": "🔸 séparateur"
+  },
+  "➕ plus / concaténer": {
+    "prefix": "plus",
+    "body": "➕ ",
+    "description": "➕ plus / concaténer"
+  },
+  "➖ moins": {
+    "prefix": "moins",
+    "body": "➖ ",
+    "description": "➖ moins"
+  },
+  "✖️ fois / répéter": {
+    "prefix": "fois",
+    "body": "✖️ ",
+    "description": "✖️ fois / répéter"
+  },
+  "➗ divisé par": {
+    "prefix": "divise",
+    "body": "➗ ",
+    "description": "➗ divisé par"
+  },
+  "🍕 reste (modulo)": {
+    "prefix": "modulo",
+    "body": "🍕 ",
+    "description": "🍕 reste (modulo)"
+  },
+  "➡️ intervalle a ➡️ b": {
+    "prefix": "jusqua",
+    "body": "➡️ ",
+    "description": "➡️ intervalle a ➡️ b"
+  },
+  "🟰 égal à": {
+    "prefix": "egal",
+    "body": "🟰 ",
+    "description": "🟰 égal à"
+  },
+  "🚫🟰 différent de": {
+    "prefix": "different",
+    "body": "🚫🟰 ",
+    "description": "🚫🟰 différent de"
+  },
+  "🔼 plus grand que": {
+    "prefix": "sup",
+    "body": "🔼 ",
+    "description": "🔼 plus grand que"
+  },
+  "🔽 plus petit que": {
+    "prefix": "inf",
+    "body": "🔽 ",
+    "description": "🔽 plus petit que"
+  },
+  "⏫ plus grand ou égal": {
+    "prefix": "supegal",
+    "body": "⏫ ",
+    "description": "⏫ plus grand ou égal"
+  },
+  "⏬ plus petit ou égal": {
+    "prefix": "infegal",
+    "body": "⏬ ",
+    "description": "⏬ plus petit ou égal"
+  },
+  "🤝 et": {
+    "prefix": "et",
+    "body": "🤝 ",
+    "description": "🤝 et"
+  },
+  "🤷 ou": {
+    "prefix": "ou",
+    "body": "🤷 ",
+    "description": "🤷 ou"
+  },
+  "🚫 non": {
+    "prefix": "non",
+    "body": "🚫 ",
+    "description": "🚫 non"
+  },
+  "✅ vrai": {
+    "prefix": "vrai",
+    "body": "✅ ",
+    "description": "✅ vrai"
+  },
+  "❌ faux": {
+    "prefix": "faux",
+    "body": "❌ ",
+    "description": "❌ faux"
+  },
+  "🕳️ rien": {
+    "prefix": "rien",
+    "body": "🕳️ ",
+    "description": "🕳️ rien"
+  },
+  "🔟 dix": {
+    "prefix": "dix",
+    "body": "🔟 ",
+    "description": "🔟 dix"
+  },
+  "💯 cent": {
+    "prefix": "cent",
+    "body": "💯 ",
+    "description": "💯 cent"
+  },
+  "🎲 entier aléatoire entre 0 et n-1": {
+    "prefix": "hasard",
+    "body": "🎲 ",
+    "description": "🎲 entier aléatoire entre 0 et n-1"
+  },
+  "📏 taille d'une liste / d'un texte": {
+    "prefix": "taille",
+    "body": "📏 ",
+    "description": "📏 taille d'une liste / d'un texte"
+  },
+  "🔤 convertir en texte": {
+    "prefix": "entexte",
+    "body": "🔤 ",
+    "description": "🔤 convertir en texte"
+  },
+  "🔢 convertir en nombre": {
+    "prefix": "ennombre",
+    "body": "🔢 ",
+    "description": "🔢 convertir en nombre"
+  },
+  "chiffre 0": {
+    "prefix": "n0",
+    "body": "0️⃣",
+    "description": "0️⃣ chiffre 0"
+  },
+  "chiffre 1": {
+    "prefix": "n1",
+    "body": "1️⃣",
+    "description": "1️⃣ chiffre 1"
+  },
+  "chiffre 2": {
+    "prefix": "n2",
+    "body": "2️⃣",
+    "description": "2️⃣ chiffre 2"
+  },
+  "chiffre 3": {
+    "prefix": "n3",
+    "body": "3️⃣",
+    "description": "3️⃣ chiffre 3"
+  },
+  "chiffre 4": {
+    "prefix": "n4",
+    "body": "4️⃣",
+    "description": "4️⃣ chiffre 4"
+  },
+  "chiffre 5": {
+    "prefix": "n5",
+    "body": "5️⃣",
+    "description": "5️⃣ chiffre 5"
+  },
+  "chiffre 6": {
+    "prefix": "n6",
+    "body": "6️⃣",
+    "description": "6️⃣ chiffre 6"
+  },
+  "chiffre 7": {
+    "prefix": "n7",
+    "body": "7️⃣",
+    "description": "7️⃣ chiffre 7"
+  },
+  "chiffre 8": {
+    "prefix": "n8",
+    "body": "8️⃣",
+    "description": "8️⃣ chiffre 8"
+  },
+  "chiffre 9": {
+    "prefix": "n9",
+    "body": "9️⃣",
+    "description": "9️⃣ chiffre 9"
+  }
+}
